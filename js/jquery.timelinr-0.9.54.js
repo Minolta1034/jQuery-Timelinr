@@ -28,7 +28,8 @@ jQuery.fn.timelinr = function(options){
 		startAt: 					1,					// value: integer, default to 1 (first)
 		autoPlay: 					'false',			// value: true | false, default to false
 		autoPlayDirection: 			'forward',			// value: forward | backward, default to forward
-		autoPlayPause: 				2000				// value: integer (1000 = 1 seg), default to 2000 (2segs)
+		autoPlayPause: 				2000, 				// value: integer (1000 = 1 seg), default to 2000 (2segs)
+		swipeNav:					'true'				// value: true | false, default to true
 	}, options);
 
 	$(function(){
@@ -240,6 +241,17 @@ jQuery.fn.timelinr = function(options){
 				       $(settings.prevButton).click();
 				    }
 				});
+			}
+		}
+		// swipe navigation, added by Jeff
+		if(settings.swipeNav=='true' && $.mobile) {
+			$(settings.containerDiv).on( "swiperight", swiperightHandler );
+			$(settings.containerDiv).on( "swipeleft", swipeleftHandler );
+			function swiperightHandler( event ) {
+			       $(settings.prevButton).click();
+			}
+			function swipeleftHandler( event ) {
+			       $(settings.nextButton).click();
 			}
 		}
 		// default position startAt, added since 0.9.3
